@@ -4,10 +4,7 @@ import requests
 import pandas as pd
 from typing import Final
 
-country_list: Final[tuple] = ('ae', 'ar', 'at', 'au', 'be', 'bg', 'br', 'ca', 'ch', 'cn', 'co', 'cu', 'cz', 'de', 'eg',
-                              'fr', 'gb', 'gr', 'hk', 'hu', 'id', 'ie', 'il', 'in', 'it', 'jp', 'kr', 'lt', 'lv', 'ma',
-                              'mx', 'my', 'ng', 'nl', 'no', 'nz', 'ph', 'pl', 'pt', 'ro', 'rs', 'ru', 'sa', 'se', 'sg',
-                              'si', 'sk', 'th', 'tr', 'tw', 'ua', 'us', 've', 'za')
+from country import Country
 
 apikey: Final[str] = "apikey here"
 
@@ -68,8 +65,12 @@ def call_top_headline_api(country: str):
 
 def collect_countries_article():
     all_df = pd.DataFrame()
-    for country in country_list:
-        df = call_top_headline_api(country)
+    cnt = 0  # FIXME: APIをあまり叩かないようにするためcntセットしている。本番は外す。
+    for co in Country:
+        cnt += 1
+        if cnt >= 3:
+            break
+        df = call_top_headline_api(co.value)
         if not df.empty:
             all_df = pd.concat([all_df, df])
         time.sleep(0.5)
