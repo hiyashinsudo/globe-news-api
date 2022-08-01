@@ -12,7 +12,7 @@ def hello():
 
 
 @app.route('/hellojson', methods=['GET'])
-def hello():
+def hello_json():
     data = [
         {"name": "山田"},
         {"age": 30}
