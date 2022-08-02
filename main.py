@@ -3,6 +3,7 @@ from enum import Enum
 from flask import Flask, request, jsonify
 
 from country import Country
+import translate
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False  # 日本語文字化け対策
@@ -43,6 +44,14 @@ def test_news():
         'status': Status.OK,
         'data': data
     })
+
+
+@app.route('/translate', methods=['POST'])
+def hello():
+    original_text = request.form['text']
+    translated_text = translate.get_translation(original_text)
+    print(f"translated_text: {translated_text}")
+    return translated_text
 
 
 if __name__ == "__main__":
