@@ -27,7 +27,7 @@ def hello_json():
         {"age": 30}
     ]
     return jsonify({
-        'status': Status.OK,
+        'status': Status.OK.value,
         'data': data
     })
 
@@ -41,7 +41,7 @@ def test_news():
         {'country': Country.JP}
     ]
     return jsonify({
-        'status': Status.OK,
+        'status': Status.OK.value,
         'data': data
     })
 
