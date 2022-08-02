@@ -47,8 +47,8 @@ def test_news():
 
 
 @app.route('/translate', methods=['POST'])
-def hello():
-    original_text = request.form['text']
+def translate_post():
+    original_text = request.json['text']
     translated_text = translate.get_translation(original_text)
     print(f"translated_text: {translated_text}")
     return translated_text
