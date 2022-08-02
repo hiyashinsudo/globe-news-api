@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify
 
 from country import Country
 import translate
+import api_call
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False  # 日本語文字化け対策
@@ -52,6 +53,23 @@ def translate_post():
     translated_text = translate.get_translation(original_text)
     print(f"translated_text: {translated_text}")
     return translated_text
+
+
+@app.route('/callnewsapi', methods=['GET'])
+def call_newsapi():
+    target_country = request.args.get('country')
+    df = api_call.call_top_headline_api(target_country)
+    data = [
+        {'title': df['title']},
+        {'url': df['url']},
+        {'urlToImage': df['urlToImage']},
+        {'country': target_country}
+    ]
+
+    return jsonify({
+        'status': Status.OK.value,
+        'data': data
+    })
 
 
 if __name__ == "__main__":
