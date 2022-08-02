@@ -1,3 +1,4 @@
+import os
 import time
 import datetime
 import requests
@@ -6,7 +7,7 @@ from typing import Final
 
 from country import Country
 
-apikey: Final[str] = "apikey here"
+apikey: Final[str] = os.environ["NEWS_API_KEY"]
 
 headers = {'X-Api-Key': apikey}
 
