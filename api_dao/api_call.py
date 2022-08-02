@@ -66,11 +66,11 @@ def call_top_headline_api(country: str):
 
 def collect_countries_article():
     all_df = pd.DataFrame()
-    cnt = 0  # FIXME: APIをあまり叩かないようにするためcntセットしている。本番は外す。
+    # cnt = 0  # FIXME: APIをあまり叩かないようにするためcntセットしている。本番は外す。
     for co in Country:
-        cnt += 1
-        if cnt >= 3:
-            break
+        # cnt += 1
+        # if cnt >= 3:
+        #     break
         df = call_top_headline_api(co.value)
         if not df.empty:
             all_df = pd.concat([all_df, df])

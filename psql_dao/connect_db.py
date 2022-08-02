@@ -22,5 +22,5 @@ def insert_articles_into_db(news_list: list):
         with conn.cursor() as curs:
             extras.execute_values(
                 curs,
-                "INSERT INTO articles(title, author, url, urlToImage, description, country, publishedAt) VALUES %s",
+                "INSERT INTO articles(title, author, url, urlToImage, description, country, published_at) VALUES %s",
                 news_list)
