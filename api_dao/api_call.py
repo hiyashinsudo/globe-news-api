@@ -56,9 +56,9 @@ def call_top_headline_api(country: str):
         df['country'] = country
         print('totalResults:', data['totalResults'])
         print('df')
-        print(df[['publishedAt', 'title', 'url', 'urlToImage']])
-        df[['country', 'publishedAt', 'title', 'url', 'urlToImage']].to_csv('{}_{}_article_data.csv'.format(datetime.datetime.now(), country))
-        return df[['country', 'publishedAt', 'title', 'url', 'urlToImage']]
+        print(df[['title','author','url','urlToImage','country']])
+        # df[['country', 'publishedAt', 'title', 'url', 'urlToImage']].to_csv('{}_{}_article_data.csv'.format(datetime.datetime.now(), country))
+        return df[['title','author','url','urlToImage','description','country','publishedAt']]
     else:
         return None
         # 例外を投げる？
@@ -76,6 +76,6 @@ def collect_countries_article():
             all_df = pd.concat([all_df, df])
         time.sleep(0.5)
 
-    print('collected data')
-    print(all_df)
-    all_df.to_csv('{}_article_data.csv'.format(datetime.datetime.now()))
+    print(f'collected data: {datetime.datetime.now()}')
+    # all_df.to_csv('{}_article_data.csv'.format(datetime.datetime.now()))
+    return all_df
