@@ -60,9 +60,9 @@ def call_newsapi():
     target_country = request.args.get('country')
     df = api_call.call_top_headline_api(target_country)
     data = [
-        {'title': df['title']},
-        {'url': df['url']},
-        {'urlToImage': df['urlToImage']},
+        {'title': df['title'][0]},
+        {'url': df['url'][0]},
+        {'urlToImage': df['urlToImage'][0]},
         {'country': target_country}
     ]
 
