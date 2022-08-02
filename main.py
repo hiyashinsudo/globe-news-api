@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 
 from country import Country
 import translate
-import api_call
+from api_dao import api_call
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False  # 日本語文字化け対策
