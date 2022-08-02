@@ -27,7 +27,7 @@ def hello_json():
         {"age": 30}
     ]
     return jsonify({
-        'status': Status.OK,
+        'status': Status.OK.value,
         'data': data
     })
 
@@ -38,10 +38,10 @@ def test_news():
         {'title': "最低賃金引き上げ額、過去最大の31円 平均961円に 中央審決定 - 毎日新聞 - 毎日新聞"},
         {'url': 'https://mainichi.jp/articles/20220801/k00/00m/020/097000c'},
         {'urlToImage': 'https://cdn.mainichi.jp/vol1/2022/06/28/20220628k0000m040241000p/0c10.jpg?1'},
-        {'country': Country.JP}
+        {'country': Country.JP.value}
     ]
     return jsonify({
-        'status': Status.OK,
+        'status': Status.OK.value,
         'data': data
     })
 
