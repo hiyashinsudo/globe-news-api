@@ -79,6 +79,3 @@ def collect_countries_article():
     print('collected data')
     print(all_df)
     all_df.to_csv('{}_article_data.csv'.format(datetime.datetime.now()))
-
-
-collect_countries_article()
