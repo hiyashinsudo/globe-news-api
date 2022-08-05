@@ -7,6 +7,8 @@ import translate
 from api_dao import api_call
 from country import CountryDetail
 
+import psql_dao.connect_db
+
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False  # 日本語文字化け対策
 app.config["JSON_SORT_KEYS"] = False  # ソートをそのまま
@@ -65,6 +67,23 @@ def call_newsapi():
         {'url': df['url'][0]},
         {'urlToImage': df['urlToImage'][0]},
         {'country': target_country}
+    ]
+
+    return jsonify({
+        'status': Status.OK.value,
+        'data': data
+    })
+
+
+@app.route('/getNews', methods=['GET'])
+def get_news():
+    target_country = request.args.get('country')
+    df = psql_dao.connect_db.get_article_from_db(target_country)
+    data = [
+        {'title': df['title'][0]},
+        {'url': df['url'][0]},
+        {'urlToImage': df['urltoimage'][0]},
+        {'country': df['country'][0]}
     ]
 
     return jsonify({
