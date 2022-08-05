@@ -1,11 +1,12 @@
+import datetime
 import os
 import time
-import datetime
-import requests
-import pandas as pd
 from typing import Final
 
-from country import Country
+import pandas as pd
+import requests
+
+from country import CountryDetail
 
 apikey: Final[str] = os.environ["NEWS_API_KEY"]
 
@@ -67,11 +68,11 @@ def call_top_headline_api(country: str):
 def collect_countries_article():
     all_df = pd.DataFrame()
     # cnt = 0  # FIXME: APIをあまり叩かないようにするためcntセットしている。本番は外す。
-    for co in Country:
+    for co in CountryDetail:
         # cnt += 1
         # if cnt >= 3:
         #     break
-        df = call_top_headline_api(co.value)
+        df = call_top_headline_api(co.value['code'])
         if not df.empty:
             all_df = pd.concat([all_df, df])
         time.sleep(0.5)
